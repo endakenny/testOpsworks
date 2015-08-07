@@ -1,0 +1,7 @@
+name 'configure-dsc'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures configure-dsc'
+long_description 'Installs/Configures configure-dsc'
+version '0.1.3'
