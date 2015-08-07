@@ -6,3 +6,5 @@ end
 service 'w3svc' do
   action [:start, :enable]
 end
+
+include recipe "test-called-cookbook::called"
