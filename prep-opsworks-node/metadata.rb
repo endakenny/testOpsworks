@@ -1,3 +1,3 @@
 name "install-wmf5"
-depends "test-called-cookbook"
-version "0.1.1"
+depends "install-wmf5"
+version "0.1.2"
