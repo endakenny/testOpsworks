@@ -2,13 +2,23 @@ directory 'C:\ProgramData\Sentinel' do
   action :create
 end
 
-cookbook_file 'C:\ProgramData\Sentinel\Windows6.1-KB2908075-x64.msu' do
-	source 'Windows6.1-KB2908075-x64.msu'
+cookbook_file 'C:\ProgramData\Sentinel\WindowsBlue-KB3055381-x64.msu' do
+	source 'WindowsBlue-KB3055381-x64.msu'
 	action :create
 end
 
-powershell_script "Configure LCM for dsc_resource" do
-  code <<-EOH
-  wusa C:/ProgramData/Sentinel/Windows6.1-KB2908075-x64.msu /quiet /norestart
-  EOH
+# Reboot
+reboot "now" do
+  action :nothing
+  reason 'Need to reboot'
 end
+
+
+# This also needs a reboot before we start using it
+powershell_script "Install WMF5" do
+  code <<-EOH
+  & wusa C:/ProgramData/Sentinel/WindowsBlue-KB3055381-x64.msu /quiet /norestart
+  EOH
+  notifies :reboot_now, 'reboot[now]', :immediately
+end
+
